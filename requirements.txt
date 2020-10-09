@@ -1,6 +1,7 @@
 pandas
 numpy
 RegEx
-pickle.py
+String
+Pickle
 sklearn
 streamlit
