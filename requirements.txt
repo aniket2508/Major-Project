@@ -1,7 +1,6 @@
 pandas
 numpy
 RegEx
-String
-Pickle
+docstring
 sklearn
 streamlit
