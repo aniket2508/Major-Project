@@ -1,2 +1,0 @@
-# SmartKnower-Major-Project
- 
