@@ -1,6 +1,5 @@
 pandas
 numpy
 RegEx
-docstring
 sklearn
 streamlit
