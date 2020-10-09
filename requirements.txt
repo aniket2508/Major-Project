@@ -1,7 +1,6 @@
 pandas
 numpy
-string
-re
+RegEx
 pickle
 sklearn
 streamlit
