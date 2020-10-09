@@ -1,8 +1,6 @@
 import pandas as pd
 import numpy as np
-import string
 import re
-import pickle as pk
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB as mn
 import streamlit as st
@@ -14,7 +12,7 @@ targets = data['sentiment']
 def clean(data):
     
     clean_data = []
-    punc = list(string.punctuation)
+    punc = list('!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~')
     for line in data:
         words = []
         for word in line.split():
@@ -34,9 +32,7 @@ def clean(data):
     
     return clean_data
 
-f = open('clean', 'rb')
-clean_words = pk.load(f)
-f.close()
+clean_words = clean(reviews)
 
 Y = np.array(targets == 'positive', dtype = np.int32)
 cv = TfidfVectorizer(max_features = 50000, max_df = 0.5, ngram_range = (1, 3))
