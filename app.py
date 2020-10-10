@@ -1,13 +1,14 @@
 import pandas as pd
-import numpy as np
 import re
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB as mn
+from sklearn.model_selection import train_test_split as tts
 import streamlit as st
 
-data = pd.read_csv('imdb.csv', delimiter = ',')
-reviews = data['review']
-targets = data['sentiment']
+
+data = pd.read_csv('/content/drive/My Drive/SmartKnower Major Project/movie_review.csv', delimiter = ',')
+reviews = data['text']
+y = data['tag']
 
 def clean(data):
     
@@ -32,16 +33,17 @@ def clean(data):
     
     return clean_data
 
-clean_words = clean(reviews)
+a = clean(reviews)
+x1, x2, y1, y2 = tts(a, y, test_size = 0.1)
 
-Y = np.array(targets == 'positive', dtype = np.int32)
-cv = TfidfVectorizer(max_features = 50000, max_df = 0.5, ngram_range = (1, 3))
-X = cv.fit_transform(clean_words).todense()
+cv = TfidfVectorizer()
+X = cv.fit_transform(x2).todense()
 clf = mn()
-clf.fit(X, Y)
+clf.fit(X, y2)
+keys = {'pos' : 'It is a positive review :)', 'neg': 'It is a negative review :('}
 st.title("Movie Review Classifier")
-message = st.text_area("Enter Text","Type Here ..")
+message = st.text_area("Enter Text")
 test_val = cv.transform([message])
 pred = clf.predict(test_val)
 if st.button("Predict"):
-    st.title(keys[pred])
+    st.title(keys[pred[0]])
