@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split as tts
 import streamlit as st
 
 
-data = pd.read_csv('/content/drive/My Drive/SmartKnower Major Project/movie_review.csv', delimiter = ',')
+data = pd.read_csv('movie_review.csv', delimiter = ',')
 reviews = data['text']
 y = data['tag']
 
